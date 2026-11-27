@@ -1,0 +1,115 @@
+{
+  "schema_version": "1.0",
+  "description": "Câu nói tiếng Việt mẫu và kết quả parser mong đợi. Nguồn: PRD §1 và bảng fixture §9. Dữ liệu giả, không chứa thông tin người thật.",
+  "utterances": [
+    {
+      "id": "U01",
+      "transcript": "Mua cà phê 35k",
+      "expected": {
+        "intent": "EXPENSE",
+        "items": [
+          { "description": "Cà phê", "amount_vnd": 35000, "category_id": "FOOD_COFFEE", "payment_method": "UNKNOWN" }
+        ]
+      }
+    },
+    {
+      "id": "U02",
+      "transcript": "Mua cà phê 35 nghìn.",
+      "expected": {
+        "intent": "EXPENSE",
+        "items": [
+          { "description": "Cà phê", "amount_vnd": 35000, "category_id": "FOOD_COFFEE", "payment_method": "UNKNOWN" }
+        ]
+      }
+    },
+    {
+      "id": "U03",
+      "transcript": "Mua rau 30k và thịt 90k",
+      "expected": {
+        "intent": "MULTI_EXPENSE",
+        "items": [
+          { "description": "Rau", "amount_vnd": 30000, "category_id": "FOOD_GROCERIES", "payment_method": "UNKNOWN" },
+          { "description": "Thịt", "amount_vnd": 90000, "category_id": "FOOD_GROCERIES", "payment_method": "UNKNOWN" }
+        ]
+      }
+    },
+    {
+      "id": "U04",
+      "transcript": "Sáng nay mua bánh mì 25 nghìn và cà phê 35 nghìn.",
+      "expected": {
+        "intent": "MULTI_EXPENSE",
+        "relative_date": "TODAY_MORNING",
+        "items": [
+          { "description": "Bánh mì", "amount_vnd": 25000, "category_id": "FOOD_BREAKFAST", "payment_method": "UNKNOWN" },
+          { "description": "Cà phê", "amount_vnd": 35000, "category_id": "FOOD_COFFEE", "payment_method": "UNKNOWN" }
+        ]
+      }
+    },
+    {
+      "id": "U05",
+      "transcript": "Đổ xăng năm mươi nghìn",
+      "expected": {
+        "intent": "EXPENSE",
+        "items": [
+          { "description": "Đổ xăng", "amount_vnd": 50000, "category_id": "TRANSPORT_FUEL", "payment_method": "UNKNOWN" }
+        ]
+      }
+    },
+    {
+      "id": "U06",
+      "transcript": "Đổ xăng xe máy 50 nghìn tiền mặt.",
+      "expected": {
+        "intent": "EXPENSE",
+        "items": [
+          { "description": "Đổ xăng xe máy", "amount_vnd": 50000, "category_id": "TRANSPORT_FUEL", "payment_method": "CASH" }
+        ]
+      }
+    },
+    {
+      "id": "U07",
+      "transcript": "Nhận lương 15 triệu",
+      "expected": {
+        "intent": "INCOME",
+        "items": [
+          { "description": "Lương", "amount_vnd": 15000000, "category_id": "INCOME_SALARY", "payment_method": "UNKNOWN" }
+        ]
+      }
+    },
+    {
+      "id": "U08",
+      "transcript": "Mua cà phê",
+      "expected": {
+        "intent": "CLARIFICATION",
+        "unresolved_fields": ["amount_vnd"],
+        "note": "Thiếu số tiền: hỏi lại, trừ khi có giao dịch ngân hàng làm ngữ cảnh."
+      }
+    },
+    {
+      "id": "U09",
+      "transcript": "85 nghìn vừa chuyển khoản là ăn trưa",
+      "expected": {
+        "intent": "LINK_TRANSACTION",
+        "link_amount_vnd": 85000,
+        "category_hint": "FOOD_LUNCH",
+        "note": "Gợi ý giao dịch ngân hàng đang chờ; không tạo khoản chi mới."
+      }
+    },
+    {
+      "id": "U10",
+      "transcript": "Sửa cà phê sáng thành 55 nghìn",
+      "expected": {
+        "intent": "EDIT_TRANSACTION",
+        "new_amount_vnd": 55000,
+        "requires_confirmation": true
+      }
+    },
+    {
+      "id": "U11",
+      "transcript": "Hôm nay tiêu kha khá",
+      "expected": {
+        "intent": "UNKNOWN",
+        "note": "Không ghi sổ."
+      }
+    }
+  ]
+}
